@@ -27,8 +27,8 @@ def like(post_col: Collection, user_email: str, post_id: str):
     # send_message(token=token, body=f"{nickname}님이 회원님의 게시물을 좋아합니다")
 
 
-def unlike(post_col: Collection, user_email: str, post_id: str):
-    post_col.delete_one({"_id": ObjectId(post_id)}, {"$pull": {"favorite": user_email}})
+def unlike(post_col: Collection, user_email: str, post_id: str):\
+    post_col.update_one({"_id": ObjectId(post_id)}, {"$pull": {"favorite": user_email}})
 
 
 def like_it(user_email: str, post_id: str):
