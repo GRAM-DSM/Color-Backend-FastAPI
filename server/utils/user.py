@@ -7,3 +7,12 @@ def get_user_nickname(user_email: str):
     nickname = user["nickname"]
 
     return nickname
+
+
+def delete_user(user_email: str):
+    db = Color_db()
+    user_col = db.get_user_col()
+    post_col = db.get_post_col()
+
+    user_col.delete_one({"_id": user_email})
+    post_col.delete_many({"userEmail": user_email})
