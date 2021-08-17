@@ -58,7 +58,7 @@ def get_comment(comment_id: str):
     return {
         "id": comment_id,
         "user_nickname": comment["userNickname"],
-        "created_at": comment["createdAt"],
+        "created_at": str(comment["createdAt"].strftime("%Y년 %m월 %d일")),
         "content": comment["content"]
     }
 
