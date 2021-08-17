@@ -14,14 +14,14 @@ async def admin_main(type: str, page: int):
     return reports
 
 
-@router.get("/admin/post/{report_id}", status_code=status.HTTP_200_OK, tags=["admin"])
+@router.get("/admin/post", status_code=status.HTTP_200_OK, tags=["admin"])
 async def post_report_detail(report_id: str):
     report = get_post_report_detail(report_id=report_id)
 
     return report
 
 
-@router.get("/admin/comment/{report_id}", status_code=status.HTTP_200_OK, tags=["admin"])
+@router.get("/admin/comment", status_code=status.HTTP_200_OK, tags=["admin"])
 async def post_report_detail(report_id: str):
     report = get_comment_report_detail(report_id=report_id)
 
