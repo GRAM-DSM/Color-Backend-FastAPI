@@ -53,7 +53,7 @@ def get_post(id: str, type: str):
 
 def get_comment(comment_id: str):
     post = Color_db().get_post_col().find_one({"comment": {"$elemMatch": {"_id": comment_id}}})
-    comment = list(filter(lambda com: com["_id"] == "159ff4a5-5fb6-4959-8818-43fb99a9d0a9", post["comment"]))[0]
+    comment = list(filter(lambda com: com["_id"] == comment_id, post["comment"]))[0]
 
     return {
         "id": comment_id,
@@ -72,7 +72,7 @@ def delete_comment(comment_id: str):
     post_col = Color_db().get_post_col()
 
     post = post_col.find_one({"comment": {"$elemMatch": {"_id": comment_id}}})
-    del_comment = list(filter(lambda com: com["_id"] == "159ff4a5-5fb6-4959-8818-43fb99a9d0a9", post["comment"]))[0]
+    del_comment = list(filter(lambda com: com["_id"] == comment_id, post["comment"]))[0]
 
-    post_col.delete_one({"comment": {"$elemMatch": {"_id": comment_id}}}, {"$pull": {"comment": del_comment}})
+    post_col.update_one({"comment": {"$elemMatch": {"_id": comment_id}}}, {"$pull": {"comment": del_comment}})
     delete_reports(reported_obj_id=comment_id)
