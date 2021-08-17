@@ -4,9 +4,8 @@ from bson import ObjectId
 
 from server.core.db.databases import Color_db
 
-from server.utils.post import get_post, get_comment, delete_post, delete_comment
+from server.utils.post import get_post, get_comment
 from server.utils.user import get_user_nickname
-from server.utils.user import delete_user
 
 
 def get_post_report_detail(report_id: str):
@@ -50,14 +49,3 @@ def get_comment_report_detail(report_id: str):
             "created_at": str(report["created_at"].strftime("%Y년 %m월 %d일 %H시 %M분 %S초"))
         }
     }
-
-
-def admin_delete(id: str, type: str):
-    if type == "post":
-        delete_post(post_id=id)
-    elif type == "comment":
-        delete_comment(comment_id=id)
-    elif type == "user":
-        delete_user(user_email=id)
-    else:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="wrong type")

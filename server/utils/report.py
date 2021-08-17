@@ -52,3 +52,10 @@ def get_reports(type: str, page: int):
 
 def delete_reports(reported_obj_id: str):
     Color_db().get_report_col().delete_many({"id": reported_obj_id})
+
+
+def delete_report(report_id: str):
+    report_col = Color_db().get_report_col()
+
+    reported_obj_id = report_col.find_one({"_id": ObjectId(report_id)})["id"]
+    delete_reports(reported_obj_id=reported_obj_id)
