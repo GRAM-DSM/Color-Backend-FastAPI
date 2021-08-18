@@ -7,7 +7,7 @@ from server.config import SECRET_KEY, ALGORITHM
 
 def decode_token(token):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token[7:], SECRET_KEY, algorithms=[ALGORITHM])
         if (payload["type"] == "access"):
             return payload["sub"]
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="access token is required")
