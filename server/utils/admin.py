@@ -19,7 +19,7 @@ def get_post_report_detail(report_id: str):
     return {
         "post": reported_post,
         "report": {
-            "report_id": report["_id"],
+            "report_id": str(report["_id"]),
             "user_email": report["user_email"],
             "user_nickname": get_user_nickname(report["user_email"]),
             "feel": report["feel"],
@@ -43,7 +43,7 @@ def get_comment_report_detail(report_id: str):
         "post": commented_post,
         "comment": reported_comment,
         "report": {
-            "report_id": report["_id"],
+            "report_id": str(report["_id"]),
             "user_email": report["user_email"],
             "user_nickname": get_user_nickname(report["user_email"]),
             "feel": report["feel"],
