@@ -24,7 +24,7 @@ async def post_report_detail(report_id: str):
 
 
 @router.get("/admin/comment", status_code=status.HTTP_200_OK, tags=["admin"])
-async def post_report_detail(report_id: str):
+async def comment_report_detail(report_id: str):
     report = get_comment_report_detail(report_id=report_id)
 
     return report
