@@ -45,6 +45,7 @@ def get_post(id: str, type: str):
 
     return {
         "id": str(id),
+        "user_email": post["userEmail"],
         "nickname": post["nickname"],
         "created_at": str(post["createdAt"].strftime("%Y년 %m월 %d일")),
         "content": post["content"]
@@ -57,6 +58,7 @@ def get_comment(comment_id: str):
 
     return {
         "id": comment_id,
+        "user_email": comment["userEmail"],
         "user_nickname": comment["userNickname"],
         "created_at": str(comment["createdAt"].strftime("%Y년 %m월 %d일")),
         "content": comment["content"]
