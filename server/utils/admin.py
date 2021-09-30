@@ -14,7 +14,7 @@ def get_post_report_detail(report_id: str):
     if not report:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="could not find report matching this id")
 
-    reported_post = get_post(id=report["id"], type=report["type"])
+    reported_post = get_post(id=report["reported_id"], type=report["type"])
 
     return {
         "post": reported_post,
@@ -36,8 +36,8 @@ def get_comment_report_detail(report_id: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="could not find report matching this id")
 
 
-    commented_post = get_post(id=report["id"], type=report["type"])
-    reported_comment = get_comment(comment_id=report["id"])
+    commented_post = get_post(id=report["reported_id"], type=report["type"])
+    reported_comment = get_comment(comment_id=report["reported_id"])
 
     return {
         "post": commented_post,

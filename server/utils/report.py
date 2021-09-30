@@ -15,7 +15,7 @@ def create_report(user_email: str, id: str, reason: str, feel: str, type: str):
 
     report_col.insert_one({
         "user_email": user_email,
-        "id": id,
+        "reported_id": id,
         "reason": reason,
         "feel": feel,
         "type": type,
@@ -51,11 +51,9 @@ def get_reports(type: str, page: int):
 
 
 def delete_reports(reported_obj_id: str):
-    Color_db().get_report_col().delete_many({"id": reported_obj_id})
+    Color_db().get_report_col().delete_many({"reported_id": reported_obj_id})
 
 
 def delete_report(report_id: str):
-    report_col = Color_db().get_report_col()
-
-    reported_obj_id = report_col.find_one({"_id": ObjectId(report_id)})["id"]
+    reported_obj_id = Color_db().get_report_col().find_one({"_id": ObjectId(report_id)})["reported_id"]
     delete_reports(reported_obj_id=reported_obj_id)
