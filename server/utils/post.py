@@ -43,8 +43,11 @@ def get_post(id: str, type: str):
     else:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="wrong type")
 
+    if not post:
+        raise  HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="there is no post")
+
     return {
-        "id": str(id),
+        "id": str(post["_id"]),
         "user_email": post["userEmail"],
         "nickname": post["nickname"],
         "created_at": str(post["createdAt"].strftime("%Y년 %m월 %d일")),
@@ -55,6 +58,9 @@ def get_post(id: str, type: str):
 def get_comment(comment_id: str):
     post = Color_db().get_post_col().find_one({"comment": {"$elemMatch": {"_id": comment_id}}})
     comment = list(filter(lambda com: com["_id"] == comment_id, post["comment"]))[0]
+
+    if not comment:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="there is no comment")
 
     return {
         "id": comment_id,
